@@ -123,7 +123,7 @@ sudo chown -R www-data:www-data /var/www/
 sudo vim /etc/nginx/sites-available/socialnet
 ```
 
-Paste this server block (replace `php8.1` with your PHP version):
+Paste this server block since php8.3 is used, replace with your current version.
 
 ```nginx
 server {
@@ -137,7 +137,7 @@ server {
 
     location ~ \.php$ {
         include snippets/fastcgi-php.conf;
-        fastcgi_pass unix:/var/run/php/php8.1-fpm.sock;
+        fastcgi_pass unix:/var/run/php/php8.3-fpm.sock;
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
         include fastcgi_params;
     }
