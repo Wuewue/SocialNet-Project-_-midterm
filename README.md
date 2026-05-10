@@ -1,6 +1,8 @@
+# Student ; Pham Thanh Tung
+## id: 1694591
 # SocialNet
 
-A full-stack social networking web application built with **PHP**, **MySQL**, **Nginx**, and plain **CSS** — featuring an Instagram-inspired UI with user authentication, profile management, and a clean sidebar navigation.
+A full-stack social networking web application built with **PHP**, **MySQL**, **Nginx**, and plain **CSS** — featuring UI with user authentication, profile management, and a clean sidebar navigation.
 
 ---
 
