@@ -24,14 +24,14 @@ $requestedOwner = trim($_GET['owner'] ?? '');
 if (!empty($requestedOwner)) {
     // View another user's profile
     $stmt = $conn->prepare(
-        "SELECT username, fullname, description FROM account WHERE username = ? LIMIT 1"
+        "SELECT Id, username, fullname, description FROM account WHERE username = ? LIMIT 1"
     );
     $stmt->bind_param('s', $requestedOwner);
 } else {
     // Default: view own profile
     $currentUserId = $_SESSION['user_id'];
     $stmt = $conn->prepare(
-        "SELECT username, fullname, description FROM account WHERE Id = ? LIMIT 1"
+        "SELECT Id, username, fullname, description FROM account WHERE Id = ? LIMIT 1"
     );
     $stmt->bind_param('i', $currentUserId);
 }
@@ -40,6 +40,19 @@ $stmt->execute();
 $result  = $stmt->get_result();
 $profile = $result->fetch_assoc();
 $stmt->close();
+
+// ── Check if they are friends ────────────────────────────────
+$isFriend = false;
+$profileId = $profile['Id'] ?? null;
+if ($profileId && $profileId !== $_SESSION['user_id']) {
+    $stmt_friend = $conn->prepare("SELECT 1 FROM friendship WHERE user_id = ? AND friend_id = ?");
+    $stmt_friend->bind_param('ii', $_SESSION['user_id'], $profileId);
+    $stmt_friend->execute();
+    if ($stmt_friend->get_result()->num_rows > 0) {
+        $isFriend = true;
+    }
+    $stmt_friend->close();
+}
 $conn->close();
 
 // ── 404 handling ─────────────────────────────────────────────
@@ -110,9 +123,21 @@ $activePage = 'profile';
                                     Edit Profile
                                 </a>
                             <?php else: ?>
-                                <a href="/socialnet/index.php" class="btn btn-outline btn-sm">
-                                    ← Back
-                                </a>
+                                <?php if ($isFriend): ?>
+                                    <form method="POST" action="/socialnet/friend_action.php" style="display:inline;">
+                                        <input type="hidden" name="action" value="delete">
+                                        <input type="hidden" name="friend_id" value="<?= $profileId ?>">
+                                        <input type="hidden" name="owner" value="<?= htmlspecialchars($profile['username']) ?>">
+                                        <button type="submit" class="btn btn-outline btn-sm" style="color:#d9534f; border-color:#d9534f;">Remove Friend</button>
+                                    </form>
+                                <?php else: ?>
+                                    <form method="POST" action="/socialnet/friend_action.php" style="display:inline;">
+                                        <input type="hidden" name="action" value="add">
+                                        <input type="hidden" name="friend_id" value="<?= $profileId ?>">
+                                        <input type="hidden" name="owner" value="<?= htmlspecialchars($profile['username']) ?>">
+                                        <button type="submit" class="btn btn-outline btn-sm" style="background:var(--accent); color:white; border-color:var(--accent);">Add Friend</button>
+                                    </form>
+                                <?php endif; ?>
                             <?php endif; ?>
                         </div>
 

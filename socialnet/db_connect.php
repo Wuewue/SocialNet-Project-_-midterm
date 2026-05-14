@@ -7,8 +7,8 @@
 // ============================================================
 
 define('DB_HOST', 'localhost');
-define('DB_USER', 'socialnet_user');   // Change to your MySQL user
-define('DB_PASS', 'StrongPass!23');    // Change to your MySQL password
+define('DB_USER', 'root');   // Change to your MySQL user
+define('DB_PASS', '');       // Change to your MySQL password
 define('DB_NAME', 'socialnet');
 
 // Create connection

@@ -22,6 +22,18 @@ CREATE TABLE `account` (
     UNIQUE KEY `unique_username` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- Drop table if it exists
+DROP TABLE IF EXISTS `friendship`;
+
+-- Create the friendship table
+CREATE TABLE `friendship` (
+    `user_id` INT(11) NOT NULL,
+    `friend_id` INT(11) NOT NULL,
+    PRIMARY KEY (`user_id`, `friend_id`),
+    FOREIGN KEY (`user_id`) REFERENCES `account`(`Id`) ON DELETE CASCADE,
+    FOREIGN KEY (`friend_id`) REFERENCES `account`(`Id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 -- ============================================================
 -- Optional: Seed a default admin account for testing
 -- Password: admin123 (hashed with PASSWORD_BCRYPT)

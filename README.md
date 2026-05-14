@@ -19,6 +19,7 @@ A full-stack social networking web application built with **PHP**, **MySQL**, **
 - **Secure Authentication** — bcrypt password hashing (`PASSWORD_BCRYPT`, cost 12), session fixation prevention with `session_regenerate_id()`, and auth guards on every protected page
 - **Admin Panel** — `/admin/newuser.php` for creating user accounts (no self-registration)
 - **Home Feed** — Stories-style user discovery row + card list of all registered users
+- **Friends System** — Add and Remove friends directly from their profile pages (`friendship` relationship table)
 - **Profile Pages** — View any user's profile via `?owner=username` query string
 - **Settings** — Edit your own profile bio/description
 - **About Page** — Static project information page

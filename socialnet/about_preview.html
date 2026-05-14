@@ -1,34 +1,75 @@
-<?php
-// ============================================================
-// File: socialnet/about.php
-// Description: Static about page displaying project info,
-//              student name, and student number.
-// ============================================================
-
-session_start();
-
-// ── Auth Guard ───────────────────────────────────────────────
-if (!isset($_SESSION['user_id'])) {
-    header('Location: /socialnet/signin.php');
-    exit;
-}
-
-$activePage = 'about';
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About | SocialNet</title>
-    <link rel="stylesheet" href="/socialnet/style.css">
+    <title>About | SocialNet (Preview)</title>
+    <!-- Use relative path to style.css for local double-click preview -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="app-wrapper">
 
-    <!-- Sidebar Navigation -->
-    <?php include 'navbar.php'; ?>
+    <!-- Sidebar Navigation (Hardcoded for preview) -->
+    <nav class="sidebar">
+        <!-- Logo -->
+        <div class="sidebar-logo">
+            <div class="logo-mark">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+                </svg>
+            </div>
+            <span class="logo-text">SocialNet</span>
+        </div>
+
+        <!-- Navigation Links -->
+        <div class="sidebar-nav">
+            <a href="#" class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 24 24">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+                <span>Home</span>
+            </a>
+
+            <a href="#" class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 24 24">
+                    <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+                    <circle cx="12" cy="7" r="4"/>
+                </svg>
+                <span>Profile</span>
+            </a>
+
+            <a href="#" class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="3"/>
+                    <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/>
+                </svg>
+                <span>Settings</span>
+            </a>
+
+            <a href="#" class="nav-item active">
+                <svg class="nav-icon" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="12" y1="8" x2="12" y2="12"/>
+                    <line x1="12" y1="16" x2="12.01" y2="16"/>
+                </svg>
+                <span>About</span>
+            </a>
+        </div>
+
+        <!-- Logged-in User -->
+        <div class="sidebar-user">
+            <a href="#" class="sidebar-user-card">
+                <div class="user-avatar">P</div>
+                <div class="sidebar-user-info">
+                    <div class="uname">admin</div>
+                    <div class="fname">Preview User</div>
+                </div>
+            </a>
+        </div>
+    </nav>
 
     <!-- Main Content -->
     <main class="main-content">
@@ -106,7 +147,7 @@ $activePage = 'about';
                         </div>
                         <div>
                             <div class="info-label">Submission Date</div>
-                            <div class="info-value"><?= date('F j, Y') ?></div>
+                            <div class="info-value">May 10, 2026</div>
                         </div>
                     </div>
 
